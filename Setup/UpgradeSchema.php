@@ -14,7 +14,7 @@ class UpgradeSchema implements UpgradeSchemaInterface{
 
         $installer = $setup;
         $installer->startSetup();
-        if (version_compare($context->getVersion(), '1.0.1', '<')) {
+        if (version_compare($context->getVersion(), '1.0.2', '<')) {
 
             if (!$installer->tableExists('vendor')) {
                 $table = $installer->getConnection()->newTable(
@@ -41,9 +41,9 @@ class UpgradeSchema implements UpgradeSchemaInterface{
                     )
                     ->addColumn(
                         'status',
-                        \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                        '64k',
-                        [],
+                        \Magento\Framework\DB\Ddl\Table::TYPE_BOOLEAN,
+                        null,
+                        ['nullable' => false, 'unsigned' => true],
                         'Status'
                     )
                     ->addColumn(
@@ -60,10 +60,10 @@ class UpgradeSchema implements UpgradeSchemaInterface{
                     $installer->getTable('vendor'),
                     $setup->getIdxName(
                         $installer->getTable('vendor'),
-                        ['name', 'email', 'status'],
+                        ['name'],
                         \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
                     ),
-                    ['name', 'email', 'status'],
+                    ['name'],
                     \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
                 );
             }
