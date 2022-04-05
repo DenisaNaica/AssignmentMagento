@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="A_UNIQUE_ID" translate="label" class="a-custom-css-class-to-style-this-tab" sortOrder="10">
+            <label>A meaningful label</label>
+        </tab>
+        <section id="A_UNIQUE_SECTION_ID" showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="10" translate="label">
+            <label>A meaningful section label</label>
+            <tab>A_UNIQUE_ID</tab>
+            <resource>Mageplaza_Vendor::vendor</resource>
+        </section>
+    </system>
+</config>
