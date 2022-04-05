@@ -14,7 +14,7 @@
             </item>
         </item>
     </argument>
-    <dataSource name="mageplaza_vendor_vendor_listing_data_source">
+    <dataSource name="mageplaza_vendor_vendor_listing _data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">VendorGridDataProvider</argument>
             <argument name="name" xsi:type="string">mageplaza_vendor_vendor_listing_data_source</argument>
@@ -107,12 +107,11 @@
             </childDefaults>
         </settings>
         <selectionsColumn name="ids">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="indexField" xsi:type="string">vendor_id</item>
-                    <item name="sortOrder" xsi:type="number">0</item>
-                </item>
-            </argument>
+            <settings>
+                <indexField>vendor_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>55</resizeDefaultWidth>
+            </settings>
         </selectionsColumn>
         <column name="name">
             <argument name="data" xsi:type="array">
@@ -164,6 +163,78 @@
                 <label translate="true">Email</label>
             </settings>
         </column>
+        <column name="phone">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Phone</label>
+            </settings>
+        </column>
+        <column name="city">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">City</label>
+            </settings>
+        </column>
+        <column name="postal_code">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Postal Code</label>
+            </settings>
+        </column>
+        <column name="street">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Street</label>
+            </settings>
+        </column>
+        <column name="contact_name">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Contact Name</label>
+            </settings>
+        </column>
+        <column name="region">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">State\Region</label>
+            </settings>
+        </column>
         <column name="status" component="Magento_Ui/js/grid/columns/select">
             <settings>
                 <options class="Mageplaza\Vendor\Model\Vendor\Source\Status"/>
@@ -175,7 +246,101 @@
                 <label translate="true">Status</label>
             </settings>
         </column>
-        <actionsColumn class="Mageplaza\Vendor\Ui\Component\Listing\Grid\Column\Actions" name="actions">
+        <column name="country" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Magento\Directory\Model\Config\Source\Country"/>
+                <filter>select</filter>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <dataType>select</dataType>
+                <label translate="true">Country</label>
+            </settings>
+        </column>
+        <column name="currency" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Mageplaza\Vendor\Model\Vendor\Source\MyValues"/>
+                <filter>select</filter>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <dataType>select</dataType>
+                <label translate="true">Currency</label>
+            </settings>
+        </column>
+
+        <column name="city1">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">City Shipping</label>
+            </settings>
+        </column>
+        <column name="postal_code1">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Postal Code Shipping</label>
+            </settings>
+        </column>
+        <column name="street1">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Street Shipping</label>
+            </settings>
+        </column>
+        <column name="contact_name1">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Contact Name Shipping</label>
+            </settings>
+        </column>
+        <column name="region1">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">State\Region Shipping</label>
+            </settings>
+        </column>
+        <column name="country1" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Magento\Directory\Model\Config\Source\Country"/>
+                <filter>select</filter>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <dataType>select</dataType>
+                <label translate="true">Country Shipping</label>
+            </settings>
+        </column>
+        <actionsColumn class="Mageplaza\Vendor\Ui\Component\Listing\Grid\Column\Actions" name="actions" sortOrder="30">
             <settings>
                 <indexField>vendor_id</indexField>
                 <resizeEnabled>false</resizeEnabled>

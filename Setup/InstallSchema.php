@@ -51,6 +51,7 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface{
                     [],
                     'Email'
                 )
+
                 ->setComment('Vendor Table');
             $installer->getConnection()->createTable($table);
 

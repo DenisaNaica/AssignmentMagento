@@ -65,9 +65,7 @@ class Save extends \Magento\Backend\App\Action
             if (isset($data['status']) && $data['status'] === 'true') {
                 $data['status'] = Vendor::STATUS_ENABLED;
             }
-            if (empty($data['vendor_id'])) {
-                $data['vendor_id'] = null;
-            }
+
 
             /** @var \Mageplaza\Vendor\Model\Vendor $model */
             $model = $this->vendorFactory->create();
@@ -79,10 +77,24 @@ class Save extends \Magento\Backend\App\Action
                 } catch (LocalizedException $e) {
                     $this->messageManager->addErrorMessage(__('This news no longer exists'));
                     return $resultRedirect->setPath('*/*/');
-
                 }
             }
-            $model->setData($data);
+            foreach ($data as $key =>$value){
+                if($key === 'form_key')
+                    continue;
+                foreach( $value as $key1 => $value1){
+                    foreach($value1 as $key2 =>$value2){
+//                        echo "<pre>";
+//                        var_dump($value1);
+//                        echo "<pre>";
+//                        var_dump($key1);
+                        $model->setData($key2,$value2);
+                    }
+
+
+                }
+
+            }
 
             $this->_eventManager->dispatch(
                 'mageplaza_vendor_vendor_prepare_save',
@@ -90,6 +102,17 @@ class Save extends \Magento\Backend\App\Action
             );
 
             try {
+
+                if($model['status_shipping']==='1')
+                {
+                    $model['city1'] = $model['city'];
+                    $model['region1'] = $model['region'];
+                    $model['country1'] = $model['country'];
+                    $model['postal_code1'] = $model['postal_code'];
+                    $model['contact_name1'] = $model['contact_name'];
+                    $model['street1'] = $model['street'];
+                    }
+
                 $this->vendorRepository->save($model);
                 $this->messageManager->addSuccessMessage(__("You saved the vendor"));
                 $this->dataPersistor->clear('mageplaza_vendor_vendor');

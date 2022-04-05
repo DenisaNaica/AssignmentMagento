@@ -5,11 +5,11 @@ ui_configuration.xsd">
     <argument name = "data" xsi:type = "array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">
-                mageplaza_vendor_vendor_form.vendor_form_data_source
+                mageplaza_vendor_vendor_form.mageplaza_vendor_vendor_form_data_source
             </item>
         </item>
         <item name="label" xsi:type="string" translate="true">Vendor Information</item>
-        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
     </argument>
     <settings>
         <buttons>
@@ -21,8 +21,12 @@ ui_configuration.xsd">
         </buttons>
         <namespace>mageplaza_vendor_vendor_form</namespace>
         <dataScope>data</dataScope>
+                <layout>
+                    <navContainerName>left</navContainerName>
+                    <type>tabs</type>
+                </layout>
         <deps>
-            <dep>mageplaza_vendor_vendor_form.vendor_form_data_source</dep>
+            <dep>mageplaza_vendor_vendor_form.mageplaza_vendor_vendor_form_data_source</dep>
         </deps>
     </settings>
     <dataSource name="vendor_form_data_source">
@@ -36,7 +40,7 @@ ui_configuration.xsd">
         <settings>
             <submitUrl path="mageplaza_vendor/vendor/save"/>
         </settings>
-        <dataProvider class="Mageplaza\Vendor\Model\Vendor\DataProvider" name="vendor_form_data_source">
+        <dataProvider class="Mageplaza\Vendor\Model\Vendor\DataProvider" name="mageplaza_vendor_vendor_form_data_source">
             <settings>
                 <requestFieldName>vendor_id</requestFieldName>
                 <primaryFieldName>vendor_id</primaryFieldName>
@@ -45,80 +49,347 @@ ui_configuration.xsd">
     </dataSource>
     <fieldset name="general">
         <settings>
-            <label/>
-        </settings>
-        <field name="vendor_id" formElement="input">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">vendor</item>
-                </item>
-            </argument>
-            <settings>
-                <dataType>text</dataType>
-                <visible>false</visible>
-                <dataScope>vendor_id</dataScope>
-            </settings>
-        </field>
-        <field name="status" sortOrder="10" formElement="checkbox">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">vendor</item>
-                    <item name="default" xsi:type="number">1</item>
-                </item>
-            </argument>
-            <settings>
-                <dataType>boolean</dataType>
-                <label translate="true">Enable Vendors</label>
-                <dataScope>status</dataScope>
-            </settings>
-            <formElements>
-                <checkbox>
-                    <settings>
-                        <valueMap>
-                            <map name="false" xsi:type="number">0</map>
-                            <map name="true" xsi:type="number">1</map>
-                        </valueMap>
-                        <prefer>toggle</prefer>
-                    </settings>
-                </checkbox>
-            </formElements>
-        </field>
-        <field name="name" sortOrder="20" formElement="input">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">vendor</item>
-                </item>
-            </argument>
-            <settings>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
-                </validation>
-                <dataType>text</dataType>
-                <label translate="true">Vendor Name</label>
-                <dataScope>name</dataScope>
-            </settings>
-        </field>
-    </fieldset>
-    <fieldset name="content" sortOrder="10">
-        <settings>
+            <label> Vendor Details</label>
             <collapsible>true</collapsible>
-            <label translate="true">Content</label>
         </settings>
-        <field name="email" sortOrder="10" formElement="input">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">vendor</item>
-                </item>
-            </argument>
+        <fieldset name="VENDOR_INFO">
             <settings>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
-                </validation>
-                <dataType>text</dataType>
-                <label translate="true">Vendor Email</label>
-                <dataScope>email</dataScope>
+                <label translate="true">Information</label>
             </settings>
-        </field>
+            <field name="vendor_id" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">vendor</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <visible>false</visible>
+                    <dataScope>vendor_id</dataScope>
+                </settings>
+            </field>
+            <field name="status" sortOrder="30" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">vendor</item>
+                        <item name="default" xsi:type="number">0</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Enable Vendors</label>
+                    <dataScope>status</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="name" sortOrder="40" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">vendor</item>
+                    </item>
+                </argument>
+                <settings>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                    <label translate="true">Vendor Name</label>
+                    <dataScope>name</dataScope>
+                </settings>
+            </field>
+            <field name="email" sortOrder="50" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">vendor</item>
+                    </item>
+                </argument>
+                <settings>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                    <label translate="true">Vendor Email</label>
+                    <dataScope>email</dataScope>
+                </settings>
+            </field>
+            <field name="phone" sortOrder="50" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">vendor</item>
+                    </item>
+                </argument>
+                <settings>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                    <label translate="true">Vendor Phone</label>
+                    <dataScope>phone</dataScope>
+                </settings>
+            </field>
+        </fieldset>
     </fieldset>
 
+    <fieldset name="settings">
+        <settings>
+            <label translate="true">Vendor Settings</label>
+        </settings>
+
+        <fieldset name="setings_vendor">
+            <settings>
+                <collapsible>true</collapsible>
+                <label translate="true">Vendor Settings</label>
+            </settings>
+            <field name="status1" sortOrder="30" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">vendor</item>
+                        <item name="default" xsi:type="string">no</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Notify on New Orders</label>
+                    <dataScope>status1</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="string">no</map>
+                                <map name="true" xsi:type="string">yes</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="currency">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Mageplaza\Vendor\Model\Vendor\Source\MyValues</item>
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" translate="true" xsi:type="string">Currency</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="source" xsi:type="string">Timeslot</item>
+                    </item>
+                </argument>
+            </field>
+        </fieldset>
+    </fieldset>
+    <fieldset name="content">
+        <settings>
+            <label translate="true">Vendor Addresses</label>
+
+        </settings>
+        <fieldset name="adresa1">
+            <settings>
+                <collapsible>true</collapsible>
+                <label translate="true">Billing Address</label>
+            </settings>
+            <field name="city" sortOrder="40" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">vendor</item>
+                    </item>
+                </argument>
+                <settings>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                    <label translate="true">City</label>
+                    <dataScope>city</dataScope>
+                </settings>
+            </field>
+            <field name="contact_name" sortOrder="40" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">vendor</item>
+                    </item>
+                </argument>
+                <settings>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                    <label translate="true">Contact Name</label>
+                    <dataScope>contact_name</dataScope>
+                </settings>
+            </field>
+            <field name="street" sortOrder="40" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">vendor</item>
+                    </item>
+                </argument>
+                <settings>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                    <label translate="true">Street</label>
+                    <dataScope>street</dataScope>
+                </settings>
+            </field>
+            <field name="postal_code" sortOrder="40" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">vendor</item>
+                    </item>
+                </argument>
+                <settings>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                    <label translate="true">Postal Code</label>
+                    <dataScope>postal_code</dataScope>
+                </settings>
+            </field>
+            <field name="region" sortOrder="40" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">vendor</item>
+                    </item>
+                </argument>
+                <settings>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                    <label translate="true">State\Region</label>
+                    <dataScope>region</dataScope>
+                </settings>
+            </field>
+            <field name="country">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Magento\Directory\Model\Config\Source\Country</item>
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" xsi:type="string" translate="true">Country</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="source" xsi:type="string">Timeslot</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/form/element/country</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+        </fieldset>
+        <fieldset name="adresa2">
+            <settings>
+                <collapsible>true</collapsible>
+                <label translate="true">Shipping Address</label>
+            </settings>
+            <field name="status_shipping" component="Magento_Ui/js/form/element/single-checkbox" sortOrder="0" formElement="checkbox" >
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">0</item>
+                    </item>
+                </argument>
+                <settings>
+                    <additionalClasses>
+                        <class name="admin__field-x-small">true</class>
+                    </additionalClasses>
+                    <dataType>boolean</dataType>
+                    <label>Same as billing</label>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="string">0</map>
+                                <map name="true" xsi:type="string">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="city1" sortOrder="40" formElement="input" >
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">vendor</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">City Shipping</label>
+                    <dataScope>city1</dataScope>
+                </settings>
+            </field>
+            <field name="contact_name1" sortOrder="40" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">vendor</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Contact Name Shipping</label>
+                    <dataScope>contact_name1</dataScope>
+                </settings>
+            </field>
+            <field name="street1" sortOrder="40" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">vendor</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Street Shipping</label>
+                    <dataScope>street1</dataScope>
+                </settings>
+            </field>
+            <field name="postal_code1" sortOrder="40" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">vendor</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Postal Code Shipping</label>
+                    <dataScope>postal_code1</dataScope>
+                </settings>
+            </field>
+            <field name="region1" sortOrder="40" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">vendor</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">State\Region Shipping</label>
+                    <dataScope>region1</dataScope>
+                </settings>
+            </field>
+            <field name="country1">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Magento\Directory\Model\Config\Source\Country</item>
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" xsi:type="string" translate="false">Country Shipping</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="source" xsi:type="string">Timeslot</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/form/element/country</item>
+                    </item>
+                </argument>
+            </field>
+        </fieldset>
+    </fieldset>
 </form>

@@ -4,5 +4,6 @@
         <referenceContainer name="content">
             <uiComponent name="mageplaza_vendor_vendor_listing"/>
         </referenceContainer>
+
     </body>
 </page>

@@ -71,15 +71,19 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider {
         $items = $this->collection->getItems();
         /** @var $vendors \Mageplaza\Vendor\Model\Vendor */
 
+
         foreach ( $items as $vendors) {
             $this->loadedData[$vendors->getId()] = $vendors->getData();
         }
 
         $data = $this->dataPersistor->get('mageplaza_vendor_vendor');
+
+
+
         if ( !empty($data)) {
             $vendors = $this -> collection->getNewEmptyItem();
             $vendors ->setData($data);
-            $this->loadedData[$vendors->getId()] = $vendors->getData();
+            $this->loadedData[$vendors->getId()]= $vendors->getData();
             $this->dataPersistor->clear('mageplaza_vendor_vendor');
 
         }

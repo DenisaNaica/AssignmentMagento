@@ -54,6 +54,7 @@ class Edit extends \Magento\Backend\App\Action {
         $resultPage->getConfig()->getTitle()->prepend(__('Vendors'));
         $resultPage->getConfig()->getTitle()
             ->prepend($model->getId() ? $model->getTitle(): __('Add vendor'));
+
         return $resultPage;
     }
 }

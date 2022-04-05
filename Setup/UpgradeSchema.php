@@ -10,65 +10,179 @@ class UpgradeSchema implements UpgradeSchemaInterface{
 
     public function upgrade(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
-        // TODO: Implement upgrade() method.
 
-        $installer = $setup;
-        $installer->startSetup();
-        if (version_compare($context->getVersion(), '1.0.2', '<')) {
-
-            if (!$installer->tableExists('vendor')) {
-                $table = $installer->getConnection()->newTable(
-                    $installer->getTable('vendor')
-                )
-                    ->addColumn(
-                        'vendor_id',
-                        \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-                        null,
-                        [
-                            'identity' => true,
-                            'nullable' => false,
-                            'primary' => true,
-                            'unsigned' => true,
-                        ],
-                        'ID'
-                    )
-                    ->addColumn(
-                        'name',
-                        \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                        255,
-                        ['nullable => false'],
-                        'Name'
-                    )
-                    ->addColumn(
-                        'status',
-                        \Magento\Framework\DB\Ddl\Table::TYPE_BOOLEAN,
-                        null,
-                        ['nullable' => false, 'unsigned' => true],
-                        'Status'
-                    )
-                    ->addColumn(
-                        'email',
-                        \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                        255,
-                        [],
-                        'Email'
-                    )
-                    ->setComment('Vendor Table');
-                $installer->getConnection()->createTable($table);
-
-                $installer->getConnection()->addIndex(
-                    $installer->getTable('vendor'),
-                    $setup->getIdxName(
-                        $installer->getTable('vendor'),
-                        ['name'],
-                        \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
-                    ),
-                    ['name'],
-                    \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
-                );
-            }
-            $installer->endSEtup();
+        if (version_compare($context->getVersion(), '1.0.3') < 0) {
+            $connection = $setup->getConnection();
+            $connection->addColumn(
+                $setup->getTable('vendor'),
+                'phone',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'default' => '',
+                    'comment' => 'Telephone'
+                ]
+            );
+        }
+        if (version_compare($context->getVersion(), '1.0.4') < 0) {
+            $connection = $setup->getConnection();
+            $connection->addColumn(
+                $setup->getTable('vendor'),
+                'city',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'default' => '',
+                    'comment' => 'City'
+                ]
+            );
+            $connection->addColumn(
+                $setup->getTable('vendor'),
+                'contact_name',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'default' => '',
+                    'comment' => 'Contact Name'
+                ]
+            );
+            $connection->addColumn(
+                $setup->getTable('vendor'),
+                'street',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'default' => '',
+                    'comment' => 'Street'
+                ]
+            );
+            $connection->addColumn(
+                $setup->getTable('vendor'),
+                'postal_code',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Postal Code'
+                ]
+            );
+        }
+        if (version_compare($context->getVersion(), '1.0.5') < 0) {
+            $connection = $setup->getConnection();
+            $connection->addColumn(
+                $setup->getTable('vendor'),
+                'country',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'default' => '',
+                    'comment' => 'Country'
+                ]
+            );
+            $connection->addColumn(
+                $setup->getTable('vendor'),
+                'region',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'default' => '',
+                    'comment' => 'Region'
+                ]
+            );
 
         }
+        if (version_compare($context->getVersion(), '1.0.6') < 0) {
+            $connection = $setup->getConnection();
+            $connection->addColumn(
+                $setup->getTable('vendor'),
+                'currency',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'default' => '',
+                    'comment' => 'Currency'
+                ]
+            );
+
+        }
+        if (version_compare($context->getVersion(), '1.0.8') < 0) {
+            $connection = $setup->getConnection();
+            $connection->addColumn(
+                $setup->getTable('vendor'),
+                'region1',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'default' => '',
+                    'comment' => 'Region Shipping'
+                ]
+            );
+            $connection->addColumn(
+                $setup->getTable('vendor'),
+                'country1',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'default' => '',
+                    'comment' => 'Country Shipping'
+                ]
+            );
+            $connection->addColumn(
+                $setup->getTable('vendor'),
+                'postal_code1',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Postal Code Shipping'
+                ]
+            );
+            $connection->addColumn(
+                $setup->getTable('vendor'),
+                'city1',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'default' => '',
+                    'comment' => 'City Shipping'
+                ]
+            );
+            $connection->addColumn(
+                $setup->getTable('vendor'),
+                'contact_name1',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'default' => '',
+                    'comment' => 'Contact Name Shipping'
+                ]
+            );
+            $connection->addColumn(
+                $setup->getTable('vendor'),
+                'street1',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'default' => '',
+                    'comment' => 'Street Shipping'
+                ]
+            );
+
+        }
+
     }
 }
+
+
