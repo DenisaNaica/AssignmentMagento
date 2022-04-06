@@ -23,6 +23,7 @@ interface VendorInterface{
     const COUNTRY_S      = 'country1';
     const REGION_S      = 'region1';
     const CURRENCY_S     = 'currency1';
+    const EMAIL_ORDER    = 'email_order';
 
     public function getId();
     public  function getName();
@@ -42,6 +43,7 @@ interface VendorInterface{
     public function getCountryS();
     public function getRegionS();
     public function getCurrency();
+    public function getEmailOrder();
     public function setId($id);
     public function setName($name);
     public function setEmail($email);
@@ -60,5 +62,5 @@ interface VendorInterface{
     public function setStreetS($street);
     public function setCountryS($country);
     public function setRegionShipping($region);
-
+    public function setEmailOrder($email_order);
 }

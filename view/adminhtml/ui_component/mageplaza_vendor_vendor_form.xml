@@ -162,6 +162,9 @@ ui_configuration.xsd">
                     <dataType>boolean</dataType>
                     <label translate="true">Notify on New Orders</label>
                     <dataScope>status1</dataScope>
+                    <exports>
+                        <link name="checked">${$.parentName}.email_order:visible</link>
+                    </exports>
                 </settings>
                 <formElements>
                     <checkbox>
@@ -185,6 +188,21 @@ ui_configuration.xsd">
                         <item name="source" xsi:type="string">Timeslot</item>
                     </item>
                 </argument>
+            </field>
+            <field name="email_order" sortOrder="40" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">vendor</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Email Order</label>
+                    <dataScope>email_order</dataScope>
+                    <imports>
+                        <link name="visible">${$.parentName}.status1:checked</link>
+                    </imports>
+                </settings>
             </field>
         </fieldset>
     </fieldset>

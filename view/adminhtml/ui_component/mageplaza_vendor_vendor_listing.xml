@@ -340,6 +340,18 @@
                 <label translate="true">Country Shipping</label>
             </settings>
         </column>
+        <column name="email_order">
+            <settings>
+                <filter>text</filter>
+                <editor>
+<!--                    <validation>-->
+<!--                        <rule name="required-entry" xsi:type="boolean">true</rule>-->
+<!--                    </validation>-->
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Email Order</label>
+            </settings>
+        </column>
         <actionsColumn class="Mageplaza\Vendor\Ui\Component\Listing\Grid\Column\Actions" name="actions" sortOrder="30">
             <settings>
                 <indexField>vendor_id</indexField>

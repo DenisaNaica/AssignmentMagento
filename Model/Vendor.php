@@ -260,4 +260,17 @@ class Vendor extends AbstractModel implements VendorInterface, IdentityInterface
         // TODO: Implement setRegionShipping() method.
         return $this->setData(self::REGION_S, $region);
     }
+
+    public function getEmailOrder()
+    {
+        // TODO: Implement getEmailOrder() method.
+        return parent::getData(self::EMAIL_ORDER);
+
+    }
+
+    public function setEmailOrder($email_order)
+    {
+        // TODO: Implement setEmailOrder() method.
+        return $this->setData(self::EMAIL_ORDER, $email_order);
+    }
 }
