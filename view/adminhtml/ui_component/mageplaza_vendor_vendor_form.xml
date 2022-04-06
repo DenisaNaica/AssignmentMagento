@@ -120,6 +120,7 @@ ui_configuration.xsd">
                     <dataType>text</dataType>
                     <label translate="true">Vendor Email</label>
                     <dataScope>email</dataScope>
+
                 </settings>
             </field>
             <field name="phone" sortOrder="50" formElement="input">
@@ -303,6 +304,22 @@ ui_configuration.xsd">
                     <additionalClasses>
                         <class name="admin__field-x-small">true</class>
                     </additionalClasses>
+                    <exports>
+                        <link name="checked">${$.parentName}.contact_name1:disabled</link>
+                    </exports>
+                    <exports>
+                        <link name="checked">${$.parentName}.region1:disabled</link>
+                    </exports>
+                    <exports>
+                        <link name="checked">${$.parentName}.city1:disabled</link>
+                    </exports>
+                    <exports>
+                        <link name="checked">${$.parentName}.country1:disabled</link>
+                    </exports>
+                    <exports>
+                        <link name="checked">${$.parentName}.street1:disabled</link>
+                    </exports>
+
                     <dataType>boolean</dataType>
                     <label>Same as billing</label>
                 </settings>
@@ -328,6 +345,9 @@ ui_configuration.xsd">
                     <dataType>text</dataType>
                     <label translate="true">City Shipping</label>
                     <dataScope>city1</dataScope>
+                    <imports>
+                        <link name="disabled">${$.parentName}.status_shipping:checked</link>
+                    </imports>
                 </settings>
             </field>
             <field name="contact_name1" sortOrder="40" formElement="input">
@@ -340,6 +360,9 @@ ui_configuration.xsd">
                     <dataType>text</dataType>
                     <label translate="true">Contact Name Shipping</label>
                     <dataScope>contact_name1</dataScope>
+                    <imports>
+                        <link name="disabled">${$.parentName}.status_shipping:checked</link>
+                    </imports>
                 </settings>
             </field>
             <field name="street1" sortOrder="40" formElement="input">
@@ -352,6 +375,9 @@ ui_configuration.xsd">
                     <dataType>text</dataType>
                     <label translate="true">Street Shipping</label>
                     <dataScope>street1</dataScope>
+                    <imports>
+                        <link name="disabled">${$.parentName}.status_shipping:checked</link>
+                    </imports>
                 </settings>
             </field>
             <field name="postal_code1" sortOrder="40" formElement="input">
@@ -364,6 +390,9 @@ ui_configuration.xsd">
                     <dataType>text</dataType>
                     <label translate="true">Postal Code Shipping</label>
                     <dataScope>postal_code1</dataScope>
+                    <imports>
+                        <link name="disabled">${$.parentName}.status_shipping:checked</link>
+                    </imports>
                 </settings>
             </field>
             <field name="region1" sortOrder="40" formElement="input">
@@ -376,6 +405,9 @@ ui_configuration.xsd">
                     <dataType>text</dataType>
                     <label translate="true">State\Region Shipping</label>
                     <dataScope>region1</dataScope>
+                    <imports>
+                        <link name="disabled">${$.parentName}.status_shipping:checked</link>
+                    </imports>
                 </settings>
             </field>
             <field name="country1">
@@ -388,7 +420,13 @@ ui_configuration.xsd">
                         <item name="source" xsi:type="string">Timeslot</item>
                         <item name="component" xsi:type="string">Magento_Ui/js/form/element/country</item>
                     </item>
+
                 </argument>
+                <settings>
+                    <imports>
+                        <link name="disabled">${$.parentName}.status_shipping:checked</link>
+                    </imports>
+                </settings>
             </field>
         </fieldset>
     </fieldset>
