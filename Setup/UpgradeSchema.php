@@ -196,7 +196,6 @@ class UpgradeSchema implements UpgradeSchemaInterface{
             );
 
         }
-
     }
 }
 

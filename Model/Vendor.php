@@ -47,6 +47,7 @@ class Vendor extends AbstractModel implements VendorInterface, IdentityInterface
         ];
 
     }
+    
 
     function getId(){
         return parent::getData(self::VENDOR_ID);

@@ -1,5 +1,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
-
+    <type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
+        <plugin name="vendor_attribute_quote_to_order_item" type="Mageplaza\Vendor\Plugin\VendorAttributeQuoteToOrderItem"/>
+    </type>
 
    <preference for="Mageplaza\Vendor\Api\Data\VendorInterface"
                type="Mageplaza\Vendor\Model\Vendor"/>
@@ -45,4 +47,5 @@
             </argument>
         </arguments>
     </type>
+
 </config>
